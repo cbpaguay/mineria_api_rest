@@ -14,7 +14,7 @@ def saludo():
 @app.route("/api/noticia", methods=["POST"])    
 def clasificar():
     return jsonify({
-        "Falso":ns.clasificador(request.json)
+        "Etiqueta":ns.clasificador(request.json)
         })
 
 if __name__ == '__main__':
