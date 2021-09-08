@@ -1,13 +1,12 @@
-from flask import request
 from joblib import load
-import pandas as pd
-from nltk.stem.porter import PorterStemmer
 from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 import re
 import nltk
 from sklearn.feature_extraction.text import CountVectorizer
 nltk.download('stopwords')
+
+from srv import database_srv as dbs
     
 def init():
     vectorizer = CountVectorizer()
@@ -28,12 +27,14 @@ def stemming(content):
     return stemmed_content
 
 def saludo():
-    return "Hola desde flask"
+    return "Hola :)"
 
 def clasificador(item):
     modelo, vectorizer = init()
     noticia = stemming(item.get("noticia"))
     data = vectorizer.transform([noticia])
     resultado = modelo.predict(data)
-    return "Falsa" if resultado[0] == 1 else "Verdadera" 
+    item['etiqueta'] = int(resultado[0])
+    dbs.insert_new(item)
+    return item
  
