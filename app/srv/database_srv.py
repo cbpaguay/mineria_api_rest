@@ -1,13 +1,17 @@
 import sqlite3
+import os
+
+directorio = os.path.dirname(__file__).replace("srv", "data")
 
 
 def init():
-    con = sqlite3.connect("./data/db_news.db")
+    con = sqlite3.connect(directorio + "/db_news.db")
     cur = con.cursor()
-    return con,cur
+    return con, cur
+
 
 def insert_new(item):
-    con , cur = init()
+    con, cur = init()
     sql = f"""
     INSERT INTO news(id_new,rol_user,nombre,edad,sector,coordenadas,titulo,noticia,is_fake) 
      VALUES (NULL,'ROL_USUARIO','{item['nombre']}',{item['edad']},
@@ -18,31 +22,32 @@ def insert_new(item):
     con.close()
     pass
 
+
 def delete_new():
-    
     pass
 
+
 def find_all_news():
-    con , cur = init()
+    con, cur = init()
     sql = f"""
     SELECT * FROM news
     """
     cur.execute(sql)
     lista = cur.fetchall()
-    print("lista :: " , lista)
-    print(" typo lista :: " , type(lista))
     con.close()
     return lista
 
+
 def find_new(id):
-    con , cur = init()
+    con, cur = init()
     sql = f"""
     SELECT * FROM news where id_new = ?
     """
-    cur.execute(sql,[id])
+    cur.execute(sql, [id])
     noticia = cur.fetchone()
     con.close()
-    return noticia 
+    return noticia
+
 
 def update_new():
     pass
