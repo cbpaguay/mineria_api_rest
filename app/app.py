@@ -33,4 +33,5 @@ def after_request(response):
     return response
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8017)
+    #app.run(debug=True, port=8017)
+    app.run(port=8017)
