@@ -1,8 +1,8 @@
 from flask import Flask, jsonify, request
-from srv import noticia_srv as ns, database_srv as dbs
+from app.srv import noticia_srv as ns
+from app.srv import database_srv as dbs
 
 app = Flask(__name__)
-
 
 @app.route("/api/saludo")
 def saludo():

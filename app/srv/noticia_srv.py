@@ -6,7 +6,7 @@ import nltk
 from sklearn.feature_extraction.text import CountVectorizer
 nltk.download('stopwords')
 
-from srv import database_srv as dbs
+from app.srv import database_srv as dbs
     
 def init():
     vectorizer = CountVectorizer()
