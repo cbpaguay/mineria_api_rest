@@ -1,11 +1,14 @@
 from flask import Flask, jsonify, request
 from app.srv import database_srv as dbs
 from app.srv import noticia_srv as ns
+from app.srv import mapeo_srv as ms
+import os
 
 app = Flask(__name__)
+port = int(os.environ.get("PORT", 5000))
 
 
-@app.route("/api/saludo")
+@app.route("/")
 def saludo():
     return jsonify({"mensaje": ns.saludo()})
 
@@ -17,12 +20,18 @@ def clasificar():
 
 @app.route("/api/noticias")
 def lista_noticias():
-    return jsonify(dbs.find_all_news())
+    items = dbs.find_all_news()
+    if (len(items) > 0):
+        items = ms.mapeo_all(items)
+    return jsonify(items)
 
 
 @app.route("/api/noticia/<id>")
 def find_noticia(id):
-    return jsonify(dbs.find_new(id))
+    item = dbs.find_new(id)
+    if (item != None):
+        item = ms.mapeo_one(item)
+    return jsonify(item)
 
 
 """
@@ -43,4 +52,4 @@ def after_request(response):
 
 if __name__ == '__main__':
     # app.run(debug=True, port=8017)
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=port, debug=True)

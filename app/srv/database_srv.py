@@ -12,10 +12,16 @@ def init():
 
 def insert_new(item):
     con, cur = init()
+    nombre = item['nombre'].upper().strip()
+    edad = item['edad']
+    sector = item['sector'].upper().strip()
+    coordenadas = item['coordenadas'].upper().strip()
+    titulo = item['titulo'].upper().strip()
+    noticia = item['noticia'].upper().strip()
+    etiqueta = item['etiqueta']
     sql = f"""
     INSERT INTO news(id_new,rol_user,nombre,edad,sector,coordenadas,titulo,noticia,is_fake) 
-     VALUES (NULL,'ROL_USUARIO','{item['nombre']}',{item['edad']},
-     '{item['sector']}','{item['coordenadas']}','{item['titulo']}','{item['noticia']}',{item['etiqueta']})
+     VALUES (NULL,'ROL_USUARIO','{nombre}',{edad},'{sector}','{coordenadas}','{titulo}','{noticia}',{etiqueta})
     """
     cur.execute(sql)
     con.commit()
