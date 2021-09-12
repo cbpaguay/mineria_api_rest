@@ -21,6 +21,6 @@ class Noticia:
             "coordenadas": self.coordenadas,
             "titulo": self.titulo,
             "noticia": self.noticia,
-            "is_fake": self.is_fake
+            "etiqueta": self.is_fake
 
         }
