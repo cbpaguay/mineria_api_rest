@@ -3,6 +3,6 @@ services:
   news_api:
     image: "news_api:v3"
     volumes:
-      - "./api:/opt/app/api"
+      - ".:/opt/app"
     ports:
       - "5000:5000"
