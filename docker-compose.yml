@@ -2,6 +2,7 @@ version: "3.8"
 services:
   news_api:
     image: "news_api:v3"
+    build: .
     volumes:
       - ".:/opt/app"
     ports:
