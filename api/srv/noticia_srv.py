@@ -4,10 +4,10 @@ from nltk.stem import SnowballStemmer
 import re
 import nltk
 from sklearn.feature_extraction.text import CountVectorizer
+from api.srv import database_srv as dbs
+import os
 
 nltk.download('stopwords')
-from app.srv import database_srv as dbs
-import os
 
 directorio = os.path.dirname(__file__).replace("srv", "data")
 

@@ -1,4 +1,4 @@
-from app.entity.noticia_dto import Noticia
+from api.entity.noticia_dto import Noticia
 
 noticia = Noticia()
 
