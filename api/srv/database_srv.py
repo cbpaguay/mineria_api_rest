@@ -57,3 +57,23 @@ def find_new(id):
 
 def update_new():
     pass
+
+def find_news_reals():
+    con, cur = init()
+    sql = f"""
+    SELECT * FROM news where is_fake = 0
+    """
+    cur.execute(sql)
+    lista = cur.fetchall()
+    con.close()
+    return lista
+
+def find_news_fakes():
+    con, cur = init()
+    sql = f"""
+    SELECT * FROM news where is_fake = 1
+    """
+    cur.execute(sql)
+    lista = cur.fetchall()
+    con.close()
+    return lista

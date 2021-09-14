@@ -26,6 +26,21 @@ def lista_noticias():
     return jsonify(items)
 
 
+@app.route("/api/noticias/reales")
+def lista_noticias_reales():
+    items = dbs.find_news_reals()
+    if (len(items) > 0):
+        items = ms.mapeo_all(items)
+    return jsonify(items)
+
+
+@app.route("/api/noticias/fakes")
+def lista_noticias_fakes():
+    items = dbs.find_news_fakes()
+    if (len(items) > 0):
+        items = ms.mapeo_all(items)
+    return jsonify(items)
+
 @app.route("/api/noticia/<id>")
 def find_noticia(id):
     item = dbs.find_new(id)
