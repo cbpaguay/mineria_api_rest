@@ -9,6 +9,7 @@ class Noticia:
         self.coordenadas = None
         self.titulo = None
         self.noticia = None
+        self.fecha = None
         self.is_fake = None
 
     def serialize(self):
@@ -21,6 +22,6 @@ class Noticia:
             "coordenadas": self.coordenadas,
             "titulo": self.titulo,
             "noticia": self.noticia,
+            "fecha": self.fecha,
             "etiqueta": self.is_fake
-
         }

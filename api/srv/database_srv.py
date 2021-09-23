@@ -1,5 +1,6 @@
 import sqlite3
 import os
+import datetime
 
 directorio = os.path.dirname(__file__).replace("srv", "data")
 
@@ -19,9 +20,10 @@ def insert_new(item):
     titulo = item['titulo'].upper().strip()
     noticia = item['noticia'].upper().strip()
     etiqueta = item['etiqueta']
+    fecha = datetime.date.today().strftime("%d-%m-%Y")
     sql = f"""
-    INSERT INTO news(id_new,rol_user,nombre,edad,sector,coordenadas,titulo,noticia,is_fake) 
-     VALUES (NULL,'ROL_USUARIO','{nombre}',{edad},'{sector}','{coordenadas}','{titulo}','{noticia}',{etiqueta})
+    INSERT INTO news(id_new,rol_user,nombre,edad,sector,coordenadas,titulo,noticia,is_fake,fecha) 
+     VALUES (NULL,'ROL_USUARIO','{nombre}',{edad},'{sector}','{coordenadas}','{titulo}','{noticia}',{etiqueta},'{fecha}')
     """
     cur.execute(sql)
     con.commit()

@@ -13,6 +13,7 @@ def mapeo_one(item):
     noticia.titulo = item[6]
     noticia.noticia = item[7]
     noticia.is_fake = item[8]
+    noticia.fecha = item[9]
     return noticia.serialize()
 
 
@@ -28,5 +29,6 @@ def mapeo_all(items):
         noticia.titulo = item[6]
         noticia.noticia = item[7]
         noticia.is_fake = item[8]
+        noticia.fecha = item[9]
         lista.append(noticia.serialize())
     return lista
