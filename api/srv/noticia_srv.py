@@ -14,9 +14,9 @@ directorio = os.path.dirname(__file__).replace("srv", "data")
 
 def init():
     vectorizer = CountVectorizer()
-    modelo = load(directorio + "/model1.joblib")
-    X = load(directorio + "/x_t1.joblib")
-    y = load(directorio + "/y_t1.joblib")
+    modelo = load(directorio + "/model.joblib")
+    X = load(directorio + "/x_t.joblib")
+    y = load(directorio + "/y_t.joblib")
     X = vectorizer.fit_transform(X)
     modelo = modelo.fit(X, y)
     return modelo, vectorizer
