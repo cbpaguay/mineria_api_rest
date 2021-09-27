@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from api.srv import database_srv as dbs
+from api.srv import db_postgres_srv as dbs
 from api.srv import noticia_srv as ns
 from api.srv import mapeo_srv as ms
 import os
@@ -66,4 +66,4 @@ def after_request(response):
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=port, debug=False)
+    app.run(host="0.0.0.0", port=port, debug=True)

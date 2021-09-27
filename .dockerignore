@@ -1,3 +1,2 @@
 venv
-.gitignore
-docker-compose.yml
+.mypy_cache

@@ -4,7 +4,7 @@ from nltk.stem import SnowballStemmer
 import re
 import nltk
 from sklearn.feature_extraction.text import CountVectorizer
-from api.srv import database_srv as dbs
+from api.srv import db_postgres_srv as dbs
 import os
 
 nltk.download('stopwords')
@@ -14,9 +14,9 @@ directorio = os.path.dirname(__file__).replace("srv", "data")
 
 def init():
     vectorizer = CountVectorizer()
-    modelo = load(directorio + "/new_model.joblib")
-    X = load(directorio + "/new_x_t.joblib")
-    y = load(directorio + "/new_y_t.joblib")
+    modelo = load(directorio + "/model1.joblib")
+    X = load(directorio + "/x_t1.joblib")
+    y = load(directorio + "/y_t1.joblib")
     X = vectorizer.fit_transform(X)
     modelo = modelo.fit(X, y)
     return modelo, vectorizer
