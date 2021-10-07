@@ -5,6 +5,7 @@ import re
 import nltk
 from sklearn.feature_extraction.text import CountVectorizer
 from api.srv import db_postgres_srv as dbs
+from api.srv import sector_srv as ss
 import os
 from langdetect import detect
 from spanlp.palabrota import Palabrota
@@ -19,9 +20,9 @@ directorio = os.path.dirname(__file__).replace("srv", "data")
 
 def init():
     vectorizer = CountVectorizer()
-    modelo = load(directorio + "/news_modelo.joblib")
-    X = load(directorio + "/news_x_t.joblib")
-    y = load(directorio + "/news_y_t.joblib")
+    modelo = load(directorio + "/modelo.joblib")
+    X = load(directorio + "/x_t.joblib")
+    y = load(directorio + "/y_t.joblib")
     X = vectorizer.fit_transform(X)
     modelo = modelo.fit(X, y)
     return modelo, vectorizer
@@ -45,17 +46,20 @@ def saludo():
 
 def clasificador(item):
     idioma = detect(item.get("noticia").lower())
-    item['sector'] = idioma
+    coordenadas = item.get("coordenadas")
+    #idioma = "es"
+    item['sector'] = ss.find_sector(coordenadas)
     if idioma in ['es', 'pt']:
         palabrota = Palabrota(censor_char="*", countries=[Country.ECUADOR], include=["vrg", "hpta",
                                                                                      "chch", "mmv",
                                                                                      "ctm", "mrd", "mierda"])
         modelo, vectorizer = init()
-        noticia = stemming(item.get("noticia"))
+        noticia = stemming(item.get("noticia").lower())
         data = vectorizer.transform([noticia])
         resultado = modelo.predict(data)
         item['etiqueta'] = int(resultado[0])
         item['noticia'] = palabrota.censor(item.get("noticia"))
+        
         dbs.insert_new(item)
     else:
         item['etiqueta'] = 2
